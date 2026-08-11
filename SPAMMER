@@ -128,6 +128,202 @@ gui.ResetOnSpawn = false
 local frame = Instance.new("Frame", gui)
 frame.Size = UDim2.new(0,300,0,330)
 frame.Position = UDim2.new(0.5,-150,0.5,-165)
+frame.BackgroundColor3 = Color3.fromRGB(20, 15, 30)
+frame.Visible = false
+frame.Active = true
+frame.Draggable = true
+Instance.new("UICorner",frame)
+
+task.delay(1, function()
+	frame.Visible = true
+end)
+
+-- TITLE (Neon Purple Banner)
+local title = Instance.new("TextLabel", frame)
+title.Size = UDim2.new(1,0,0,35)
+title.Text = "CUSTOME OWNER SPAMMER ATUL 👑"
+title.BackgroundColor3 = Color3.fromRGB(65, 30, 115)
+title.TextColor3 = Color3.new(1,1,1)
+title.Font = Enum.Font.GothamBold
+title.TextSize = 14
+Instance.new("UICorner",title)
+
+-- OWNER TEXT BOX 
+local ownerBox = Instance.new("TextBox", frame)
+ownerBox.Size = UDim2.new(0,250,0,35)
+ownerBox.Position = UDim2.new(0,25,0,50)
+ownerBox.Text = "TERA NAM DAL ATUL NE BOLA" 
+ownerBox.PlaceholderText = "Spammer Owner Name..."
+ownerBox.BackgroundColor3 = Color3.fromRGB(40, 25, 60)
+ownerBox.TextColor3 = Color3.new(1,1,1)
+ownerBox.PlaceholderColor3 = Color3.fromRGB(180, 160, 210)
+ownerBox.Font = Enum.Font.GothamBold
+ownerBox.TextSize = 12
+Instance.new("UICorner",ownerBox)
+
+-- TARGET TEXT BOX
+local nameBox = Instance.new("TextBox", frame)
+nameBox.Size = UDim2.new(0,250,0,35)
+nameBox.Position = UDim2.new(0,25,0,95)
+nameBox.PlaceholderText = "Enter Target Name..."
+nameBox.BackgroundColor3 = Color3.fromRGB(40, 25, 60)
+nameBox.TextColor3 = Color3.new(1,1,1)
+nameBox.PlaceholderColor3 = Color3.fromRGB(180, 160, 210)
+nameBox.Font = Enum.Font.GothamBold
+nameBox.TextSize = 13
+Instance.new("UICorner",nameBox)
+
+-- DELAY TEXT BOX
+local delayBox = Instance.new("TextBox", frame)
+delayBox.Size = UDim2.new(0,250,0,35)
+delayBox.Position = UDim2.new(0,25,0,140)
+delayBox.Text = "2"
+delayBox.PlaceholderText = "Delay seconds..."
+delayBox.BackgroundColor3 = Color3.fromRGB(40, 25, 60)
+delayBox.TextColor3 = Color3.new(1,1,1)
+delayBox.PlaceholderColor3 = Color3.fromRGB(180, 160, 210)
+delayBox.Font = Enum.Font.GothamBold
+delayBox.TextSize = 13
+Instance.new("UICorner",delayBox)
+
+-- LINE STYLE TEXT BOX
+local lineBox = Instance.new("TextBox", frame)
+lineBox.Size = UDim2.new(0,250,0,35)
+lineBox.Position = UDim2.new(0,25,0,185)
+lineBox.PlaceholderText = "Line Style (_ @ # + ~ ▬)"
+lineBox.BackgroundColor3 = Color3.fromRGB(40, 25, 60)
+lineBox.TextColor3 = Color3.new(1,1,1)
+lineBox.PlaceholderColor3 = Color3.fromRGB(180, 160, 210)
+lineBox.Font = Enum.Font.GothamBold
+lineBox.TextSize = 13
+Instance.new("UICorner",lineBox)
+
+-- START BUTTON
+local start = Instance.new("TextButton", frame)
+start.Size = UDim2.new(0,110,0,40)
+start.Position = UDim2.new(0,25,0,240)
+start.Text = "START"
+start.BackgroundColor3 = Color3.fromRGB(110, 40, 215)
+start.TextColor3 = Color3.new(1,1,1)
+start.Font = Enum.Font.GothamBold
+start.TextSize = 14
+Instance.new("UICorner",start)
+
+-- OFF BUTTON
+local stop = Instance.new("TextButton", frame)
+stop.Size = UDim2.new(0,110,0,40)
+stop.Position = UDim2.new(0,165,0,240)
+stop.Text = "OFF"
+stop.BackgroundColor3 = Color3.fromRGB(130, 20, 80)
+stop.TextColor3 = Color3.new(1,1,1)
+stop.Font = Enum.Font.GothamBold
+stop.TextSize = 14
+Instance.new("UICorner",stop)
+
+--------------------------------------------------
+-- FLOATING BUTTON OVERLAY
+--------------------------------------------------
+local float = Instance.new("ImageButton", gui)
+float.Size = UDim2.new(0,60,0,60)
+float.Position = UDim2.new(0,20,0,220)
+float.Image = "rbxassetid://15105493170"
+float.BackgroundTransparency = 1
+float.Active = true
+float.Draggable = true
+
+local floatText = Instance.new("TextLabel", float)
+floatText.Size = UDim2.new(1,0,1,0)
+floatText.Text = "ATUL"
+floatText.TextColor3 = Color3.new(1,1,1)
+floatText.Font = Enum.Font.GothamBlack
+floatText.TextSize = 14
+floatText.BackgroundTransparency = 1
+floatText.TextYAlignment = Enum.TextYAlignment.Center
+
+float.MouseButton1Click:Connect(function()
+	frame.Visible = not frame.Visible
+end)
+
+--------------------------------------------------
+-- DYNAMIC SPAM SYSTEM (LIMIT 170)
+--------------------------------------------------
+
+start.MouseButton1Click:Connect(function()
+
+	local customOwner = ownerBox.Text ~= "" and ownerBox.Text or "ATUL"
+	local target = nameBox.Text
+	local delay = tonumber(delayBox.Text) or 2
+	local style = lineBox.Text ~= "" and lineBox.Text or "@"
+
+	if target == "" then
+		return
+	end
+
+	enabled = true
+
+	task.spawn(function()
+
+		while enabled do
+
+			for _,msg in pairs(replies) do
+
+				if not enabled then
+					break
+				end
+
+				local prefix = "SCRIPT BY " .. customOwner .. " "
+				local middle = "{" .. target .. " KA PAPA " .. customOwner .. "} "
+				local suffix = " [" .. target .. "] " .. msg .. " " .. customOwner .. " & ATUL ON TOP 🔝"
+
+				local coreLength = #prefix + #middle + #suffix
+				local remaining = 170 - coreLength
+				if remaining < 0 then remaining = 0 end
+				
+				local safeLine = ""
+				while #safeLine + #style <= remaining do
+					safeLine = safeLine .. style
+				end
+				if #safeLine == 0 then safeLine = "@@@@@@" end
+
+				local finalMessage = prefix .. safeLine .. middle .. safeLine .. suffix
+
+				send(finalMessage)
+
+				task.wait(delay)
+
+			end
+		end
+	end)
+end)
+
+stop.MouseButton1Click:Connect(function()
+	enabled = false
+end)
+local function send(msg)
+	local channel = TextChatService.TextChannels.RBXGeneral
+	channel:SendAsync(msg)
+end
+
+--------------------------------------------------
+-- 🔥 DEFAULT LOADING MESSAGE
+--------------------------------------------------
+
+task.spawn(function()
+	local loadingLine = "SCRIPT BY LORD GUJARATI ATUL 👑🔱💀> ZENITH CLAN KA PAPA/ UNBEATABLE LORD GUJARATI ATUL 🔱/ GAME KHTM H AB💀/MOST DANGEROUS PLAYER ATUL CUSTOME SPAMMER LOADED... 💀"
+	send(loadingLine)
+end)
+
+--------------------------------------------------
+-- ADVANCED GUI (PURPLE EDITION)
+--------------------------------------------------
+
+local gui = Instance.new("ScreenGui", player.PlayerGui)
+gui.ResetOnSpawn = false
+
+-- Purple Frame Background
+local frame = Instance.new("Frame", gui)
+frame.Size = UDim2.new(0,300,0,330)
+frame.Position = UDim2.new(0.5,-150,0.5,-165)
 frame.BackgroundColor3 = Color3.fromRGB(20, 15, 30) -- Dark Purple Accent
 frame.Visible = false
 frame.Active = true
