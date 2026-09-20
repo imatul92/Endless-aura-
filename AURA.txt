@@ -1,1 +1,1 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/imatul92/Endless-aura-/refs/heads/main/AURAKINGATUL.txt"))()
+loadstring(game:HttpGet("https://pastefy.app/gOhdUKqE/raw"))()
